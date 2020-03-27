@@ -1,0 +1,155 @@
+CREATE TABLE Rejs (
+	nomer INT PRIMARY KEY AUTO_INCREMENT,
+	nomer_samoleta INT,
+	FOREIGN KEY (nomer_samoleta) REFERENCES Samolet(nomer),
+	vremya_vyleta INT NOT NULL,
+	dalnost INT NOT NULL,
+	chastota INT NOT NULL
+)
+
+Insert INTO polet (vremya_vyleta, dalnost, , chastota) 
+VALUES ('1', '1478', '38');
+VALUES ('2', '1345', '34');
+VALUES ('3', '1435', '23');
+VALUES ('4', '1765', '76');
+VALUES ('5', '1489', '46');
+VALUES ('6', '1528', '86');
+VALUES ('7', '1248', '32');
+VALUES ('8', '1358', '35');
+VALUES ('9', '1978', '15');
+VALUES ('10', '1378', '92');
+
+CREATE TABLE polet (
+	nomer INT PRIMARY KEY AUTO_INCREMENT,
+	rejs_nomer INT,
+	FOREIGN KEY (rejs_nomer) REFERENCES Rejs(nomer),
+	data_vyleta DATE NOT NULL,
+	sostojanie VARCHAR(10) NOT NULL
+)
+
+Insert INTO polet (rejs_nomer, data_vyleta, , sostojanie) 
+VALUES ('1', '11.12.13', 'ok');
+VALUES ('2', '11.11.14', 'ok');
+VALUES ('3', '15.22.16', 'ok');
+VALUES ('4', '18.10.12', 'ok');
+VALUES ('5', '16.04.20', 'ok');
+VALUES ('6', '17.06.12', 'ok');
+VALUES ('7', '15.06.15', 'ok');
+VALUES ('8', '04.11.14', 'ok');
+VALUES ('9', '17.05.11', 'ok');
+VALUES ('10', '14.09.09', 'ok');
+
+
+CREATE TABLE Samolet(
+	nomer INT PRIMARY KEY AUTO_INCREMENT,
+	model VARCHAR(30) NOT NULL,
+	tip INT(5) NOT NULL,
+	vmestimost INT(4) NOT NULL
+)
+
+Insert INTO Samolet (model, tip, vmestimost) 
+VALUES ('A1', '1', '123');
+VALUES ('A2', '8', '143');
+VALUES ('A3', '11', '223');
+VALUES ('A4', '6', '343');
+VALUES ('A5', '7', '153');
+VALUES ('A6', '5', '463');
+VALUES ('A7', '4', '678');
+VALUES ('A8', '45', '198');
+VALUES ('A9', '3', '133');
+VALUES ('A10', '2', '823');
+
+CREATE TABLE Kompanija(
+	kod INT PRIMARY KEY AUTO_INCREMENT,
+	nazvanie VARCHAR(30) NOT NULL
+)
+
+
+Insert INTO Kompanija (nazvanie) 
+VALUES ('Aeroflot');
+VALUES ('Emirates');
+VALUES ('American Airlines');
+VALUES ('United Airlines');
+VALUES ('Qantas');
+VALUES ('UTair');
+VALUES ('Ural Airlines');
+VALUES ('Turkish Airlines');
+VALUES ('Tunisair');
+VALUES ('Singapore Airlines');
+
+
+CREATE TABLE Aeroport(
+	kod INT PRIMARY KEY AUTO_INCREMENT,
+	nazvanie VARCHAR(30) NOT NULL,
+	gorod VARCHAR,
+	FOREIGN KEY (gorod) REFERENCES Gorod(gorod)
+)
+
+Insert INTO Aeroport (nazvanie, gorod) 
+VALUES ('Vnukovo', 'Moskva');
+VALUES ('Heathrow', 'London');
+VALUES ('JFK', 'NewYork');
+VALUES ('Havalinami', 'Istanbul');
+VALUES ('CDG', 'Paris');
+VALUES ('TXL', 'Berlin');
+VALUES ('Fiumicino', 'Rome');
+VALUES ('Barajas', 'Madrid');
+VALUES ('Schwechat', 'Vienna');
+VALUES ('Boryspil', 'Kiev');
+
+CREATE TABLE Gorod(
+	gorod VARCHAR PRIMARY KEY NOT NULL,
+	strana VARCHAR(10) NOT NULL
+)
+
+Insert INTO Gorod (gorod, strana) 
+VALUES ('Moskva', 'Russia');
+VALUES ('London', 'England');
+VALUES ('NewYork', 'USA');
+VALUES ('Istanbul', 'Turkey');
+VALUES ('Paris', 'France');
+VALUES ('Berlin', 'German');
+VALUES ('Rome', 'Italy');
+VALUES ('Madrid', 'Spain');
+VALUES ('Vienna', 'Austria');
+VALUES ('Kiev', 'Ukraine');
+
+CREATE TABLE Ekipazh(
+	kod INT PRIMARY KEY AUTO_INCREMENT,
+	rejs_nomer INT,
+	FOREIGN KEY (rejs_nomer) REFERENCES Rejs(nomer)
+)
+
+Insert INTO Ekipazh (rejs_nomer) 
+VALUES ('1');
+VALUES ('2');
+VALUES ('3');
+VALUES ('4');
+VALUES ('5');
+VALUES ('6');
+VALUES ('7');
+VALUES ('8');
+VALUES ('9');
+VALUES ('10');
+
+CREATE TABLE Sotrudnik(
+	kod INT PRIMARY KEY AUTO_INCREMENT,
+	ekipazh_kod INT,
+	FOREIGN KEY (ekipazh_kod) REFERENCES Ekipazh(kod),
+	imya VARCHAR(20) NOT NULL,
+	familiya VARCHAR(20) NOT NULL,
+	dolzhnost VARCHAR(20) NOT NULL,
+	stazh INT(2) NOT NULL,
+)
+
+Insert INTO Sotrudnik (ekipazh_kod, imya, familiya, dolzhnost, stazh) 
+VALUES ('123', 'Ivan', 'Ivanov', 'komandir', '13');
+VALUES ('456', 'Petr', 'Petrov', 'pilot', '7');
+VALUES ('345', 'Pavel', 'Pavlov', 'pilot', '6');
+VALUES ('454', 'Andrey', 'Andreev', 'pilot', '19');
+VALUES ('390', 'Konstantin', 'Konstantinov', 'pilot', '9');
+VALUES ('483', 'Alekseev', 'Aleksey', 'pilot', '11');
+VALUES ('938', 'Leonid', 'Leonidov', 'pilot', '23');
+VALUES ('935', 'Dmitriy', 'Dmitriev', 'pilot', '16');
+VALUES ('389', 'Stepan', 'Stepanov', 'pilot', '3');
+VALUES ('829', 'Vasiliy', 'Vasiliev', 'pilot', '15');
